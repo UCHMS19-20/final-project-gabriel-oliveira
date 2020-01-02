@@ -1,7 +1,25 @@
-import time
+import sys
+import pygame
 
-print("Welcome to the sample repository!")
-time.sleep(1)
-print("All the code for your game should go in the src folder")
-time.sleep(1)
-print("Now delete this file and make your own!")
+# Initialize pygame so it runs in the background and manages things
+pygame.init()
+
+# Create a display. Size must be a tuple, which is why it's in parentheses
+screen = pygame.display.set_mode( (400, 300) )
+
+# Main loop. Your game would go inside this loop
+while True:
+    # do something for each event in the event queue (list of things that happen)
+    for event in pygame.event.get():
+        # Check to see if the current event is a QUIT event
+        if event.type == pygame.QUIT:
+            # If so, exit the program
+            sys.exit()
+    
+    # main code goes here
+    pygame.draw.line(screen, (255, 255, 255), (50, 100), (350, 100), 1)
+    pygame.draw.line(screen, (255, 255, 255), (50, 200), (350, 200), 1)
+    pygame.draw.line(screen, (255, 255, 255), (150, 50), (150, 250), 1)
+    pygame.draw.line(screen, (255, 255, 255), (250, 50), (250, 250), 1)
+
+    pygame.display.flip()
