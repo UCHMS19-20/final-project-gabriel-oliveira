@@ -1,11 +1,29 @@
 import sys
 import pygame
 
+def check(a, b, c):
+    if clicked[a] == 0:
+        return False
+    elif clicked[b] == 0:
+        return False
+    elif clicked[c] == 0:
+        return False
+    else:
+        if clicked [a] % 2 == clicked[b] % 2:
+            if clicked [a]%2 == clicked[c]%2:
+                return True
+            else:
+                return False
+        else:
+            return False
 # Initialize pygame so it runs in the background and manages things
 pygame.init()
 def give_color(clicked, hovering):
-    if clicked:
-        return (255, 255, 255)
+    if clicked != 0:
+        if clicked % 2 == 0:
+            return (255, 255, 255)
+        else:
+            return (255, 0, 0)
     else:
         if hovering:
             return (128, 128, 128)
@@ -13,12 +31,9 @@ def give_color(clicked, hovering):
             return (0, 0, 0)
 # Create a display. Size must be a tuple, which is why it's in parentheses
 screen = pygame.display.set_mode( (400, 300) )
-clicked = [False, False, False, False, False, False, False, False, False]
-hovered = [False, False, False, False, False, False, False, False, False]
-# Main loop. Your game would go inside this loop
+clicked = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+hovered = [False, False, False, False, False, False, False, False, False] # Main loop. Your game would go inside this loop
 while True:
-
-
     # do something for each event in the event queue (list of things that happen)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -27,23 +42,23 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
             if ((50<pos[0] and pos[0]<150) and (50<pos[1] and pos[1]<100)):
-                clicked[0]= True
+                clicked[0] += 1
             if ((150<pos[0] and pos[0]<250) and (100<pos[1] and pos[1]<200)):
-                clicked[4]= True
+                clicked[4] += 1
             if ((150<pos[0] and pos[0]<250) and (200<pos[1] and pos[1]<250)):
-                clicked[7]= True
+                clicked[7] += 1
             if ((50<pos[0] and pos[0]<150) and (100<pos[1] and pos[1]<200)):
-                clicked[3]= True
+                clicked[3] += 1
             if ((150<pos[0] and pos[0]<250) and (50<pos[1] and pos[1]<100)):
-                clicked[1]= True
+                clicked[1] += 1
             if ((50<pos[0] and pos[0]<150) and (200<pos[1] and pos[1]<250)):
-                clicked[6]= True
+                clicked[6] += 1
             if ((250<pos[0] and pos[0]<350) and (50<pos[1] and pos[1]<100)):
-                clicked[2]= True
+                clicked[2] += 1
             if ((250<pos[0] and pos[0]<350) and (100<pos[1] and pos[1]<200)):
-                clicked[5]= True
+                clicked[5] += 1
             if ((250<pos[0] and pos[0]<350) and (200<pos[1] and pos[1]<250)):
-                clicked[8]= True
+                clicked[8] += 1
         if event.type == pygame.MOUSEMOTION:
             pos = pygame.mouse.get_pos()
             if ((50<pos[0] and pos[0]<150) and (50<pos[1] and pos[1]<100)):
@@ -156,4 +171,28 @@ while True:
     pygame.draw.line(screen, (255, 255, 255), (150, 50), (150, 250), 1)
     pygame.draw.line(screen, (255, 255, 255), (250, 50), (250, 250), 1)
 
+    if check(0, 1, 2) == True:
+        print("you win")
+        break
+    elif check(3,4,5) == True:
+        print("You win")
+        break
+    elif check(6,7,8) == True:
+        print("you win")
+        break
+    elif check(0,3,6) == True:
+        print("You win")
+        break
+    elif check(1,4,7) == True:
+        print("you win")
+        break
+    elif check(2,5,8) == True:
+        print("You win")
+        break
+    elif check(0,4,8) == True:
+        print("You win")
+        break
+    elif check(2,4,6) == True:
+        print("You win")
+        break
     pygame.display.flip()
