@@ -19,6 +19,7 @@ def check(a, b, c):
 # Initialize pygame so it runs in the background and manages things
 pygame.init()
 def give_color(clicked, hovering):
+    #determine what color the box will turn when clicked or hovering
     if clicked != 0:
         if clicked % 2 == 0:
             return (255, 255, 255)
@@ -32,7 +33,8 @@ def give_color(clicked, hovering):
 # Create a display. Size must be a tuple, which is why it's in parentheses
 screen = pygame.display.set_mode( (400, 300) )
 clicked = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-hovered = [False, False, False, False, False, False, False, False, False] # Main loop. Your game would go inside this loop
+hovered = [False, False, False, False, False, False, False, False, False]
+# Main loop. Your game would go inside this loop
 total_clicks = 0
 while True:
     # do something for each event in the event queue (list of things that happen)
@@ -42,7 +44,8 @@ while True:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             total_clicks += 1
-            pos = pygame.mouse.get_pos()
+            pos = pygame.mouse.get_pos() 
+            #determine if number of clicks is even or odd
             if ((50<pos[0] and pos[0]<150) and (50<pos[1] and pos[1]<100)):
                 if total_clicks % 2 == 0:
                     clicked[0] = 2
@@ -89,6 +92,7 @@ while True:
                 else:
                     clicked[8] = 1
         if event.type == pygame.MOUSEMOTION:
+            #allow hover of boxes to be gray
             pos = pygame.mouse.get_pos()
             if ((50<pos[0] and pos[0]<150) and (50<pos[1] and pos[1]<100)):
                 hovered[0]= True
